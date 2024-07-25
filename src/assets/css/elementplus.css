@@ -1,0 +1,5 @@
+/* element plus theming */
+:root {
+    /* --el-color-primary: green; */
+    --el-menu-hover-bg-color: var(--md-sys-color-secondary);
+}
