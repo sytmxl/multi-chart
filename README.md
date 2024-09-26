@@ -1,6 +1,5 @@
-# Vue 3 + Vite
+# VisImage-Seg
+data-process: scripts and data(further info in its README)
+other files: interface for data display and human feedback.(a vue3 front-end project)
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
-# multi-chart
+image data and json data can be accessed via different methods in ./src/utils.js (use remote by default when deployed)
