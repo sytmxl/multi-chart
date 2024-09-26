@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="flex surface">
     <gallery-view 
-      :currentIndex="currentIndex" 
+      :currentIndex="currentIndex"
       @openDetail="openDetailView"
       class="w-3/12 " 
     />
@@ -16,20 +16,21 @@
 
 <script setup>
 import { ref, computed, onMounted, onBeforeMount } from 'vue';
-import data from './utils';
+import loadData from './utils';
 import { useLocalTagManagement } from './composables/useLocalTagManagement';
 import DetailView from './components/DetailView.vue';
 import GalleryView from './components/GalleryView.vue';
 const { currentImageTags } = useLocalTagManagement();
 
-
-// 生成图片列表
-const imageList = computed(() => data);
-// 当前选中的图片对象
-const selectedImage = ref(imageList.value[0]);
-
-// 设置初始选中图片为数据中的第一个
-onBeforeMount(() => {
+const imageList = ref(null); // Reactive variable to hold the data
+const selectedImage = ref(null);
+// 当前图片的索引
+const currentIndex = computed(() => {
+  if (!imageList.value) return 0; // Guard clause to check if imageList is initialized
+  return imageList.value?.findIndex(img => img.file_name === selectedImage.value?.file_name);
+});
+onBeforeMount(async () => {
+  imageList.value = await loadData(); // Fetch data on component mount
   if (imageList.value.length > 0) {
     selectedImage.value = imageList.value[0];
   }
@@ -38,11 +39,6 @@ onBeforeMount(() => {
 const openDetailView = (index) => {
   selectedImage.value = imageList.value[index];
 };
-
-// 当前图片的索引
-const currentIndex = computed(() => {
-  return imageList.value.findIndex(img => img.file_name === selectedImage.value?.file_name);
-});
 
 // 导航到指定的图片
 const navigateToImage = (step) => {

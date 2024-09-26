@@ -37,8 +37,5 @@ const loadData = async () => {
   const data = remoteData;
   return data;
 };
-
-const data = await loadData(); // Store the promise in 'data'
-
-export default data; // Export the promise
+export default loadData; // Export the promise
 

@@ -50,9 +50,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch, onBeforeMount } from 'vue';
 import { getImageUrl } from '../utils';
-import data from '../utils';
+import loadData from '../utils';
 const emit = defineEmits(['openDetail']);
 
 const pageSize = 20;
@@ -65,9 +65,10 @@ const props = defineProps({
   currentIndex: Number, 
 });
 
-// Adjust the logic to work with the `currentImage` object
-const allImages = computed(() => {
-  return data;
+const allImages = ref([])
+
+onBeforeMount(async () => {
+  allImages.value = await loadData(); // Fetch data on component mount
 });
 
 const displayedImages = computed(() => {
