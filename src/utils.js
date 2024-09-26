@@ -26,15 +26,17 @@ async function fetchData(url) {
   }
 }
 
-
 const ossPrefix = 'https://mosycdn.oss-rg-china-mainland.aliyuncs.com/';
 
-// import localData from './assets/alpha.json';
+const loadData = async () => {
+  // simplified_captions.json (4433) alpha.json (912) beta.json (103)
+  const remoteFile = 'beta.json';
+  const remoteData = await fetchData(ossPrefix + remoteFile);
 
-// simplified_captions.json (4433) alpha.json (912) beta.json (103)
-remoteFile = 'beta.json';
-const remoteData = await fetchData(ossPrefix + remoteFile);
+  // Choose to load local data or remote data
+  const data = remoteData;
+  return data;
+};
 
-// choose to load local data or remote data
-const data = remoteData
-export default data;
+export default loadData();
+
