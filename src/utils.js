@@ -38,5 +38,7 @@ const loadData = async () => {
   return data;
 };
 
-export default loadData();
+const data = await loadData(); // Store the promise in 'data'
+
+export default data; // Export the promise
 
